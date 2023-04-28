@@ -2,6 +2,7 @@ import unittest
 from get_data import *
 from demographics import Demographics
 from rlsd import StepDown
+from bwsq import Squat
 
 class TestInitialData(unittest.TestCase):
     def test_demographic(self):
@@ -37,3 +38,21 @@ class TestInitialData(unittest.TestCase):
         self.assertEqual((10.31173960310218, 18.047827590237784), subject_object.ankle_power)
         self.assertEqual((45.03117354457981, 49.893285437348446), subject_object.knee_power)
         self.assertEqual((44.65708685231801, 32.058886972413774), subject_object.hip_power)
+
+    def test_bwsq(self):
+        bwsq_dict = get_dict_data('bwsq.xlsx', 'bwsq_data')
+        subject1 = bwsq_dict[1]
+        subject_object = Squat(subject1)
+
+        # test class using first subject
+        self.assertEqual(-57.96778,subject_object.rotational_pelvic_tilt)
+        self.assertEqual((25.69942, 23.20493), subject_object.ankle_flexion)
+        self.assertEqual((80.75887, 83.69199), subject_object.knee_flexion)
+        self.assertEqual((14.16273, 5.89156),subject_object.knee_adduction)
+        self.assertEqual((-0.01337, -0.01413), subject_object.knee_displacement)
+        self.assertEqual((74.21773, 81.18118), subject_object.hip_flexion)
+        self.assertEqual((3.09391, -14.0808),subject_object.hip_adduction)
+        self.assertEqual((398.67337, 312.75476),subject_object.foot_weight)
+        self.assertEqual((8.964519330372989, 3.529233537272964), subject_object.ankle_power)
+        self.assertEqual((48.60714940452276, 42.54304517372706), subject_object.knee_power)
+        self.assertEqual((42.42833126510425, 53.92772128899996), subject_object.hip_power)
