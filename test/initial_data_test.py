@@ -1,8 +1,9 @@
 import unittest
-from get_data import *
-from demographics import Demographics
-from rlsd import StepDown
-from bwsq import Squat
+from initial_data.get_data import *
+from initial_data.demographics import Demographics
+from initial_data.rlsd import StepDown
+from initial_data.bwsq import Squat
+from initial_data.rllun import Lunge
 
 class TestInitialData(unittest.TestCase):
     def test_demographic(self):
@@ -56,3 +57,18 @@ class TestInitialData(unittest.TestCase):
         self.assertEqual((8.964519330372989, 3.529233537272964), subject_object.ankle_power)
         self.assertEqual((48.60714940452276, 42.54304517372706), subject_object.knee_power)
         self.assertEqual((42.42833126510425, 53.92772128899996), subject_object.hip_power)
+
+    def test_rllun(self):
+        rllun_dict = get_dict_data('rllun.xlsx', 'rllun_data')
+        subject1 = rllun_dict[1]
+        subject_object = Lunge(subject1)
+
+        # test class using first subject
+        self.assertEqual((26.65927, 25.8274), subject_object.ankle_flexion)
+        self.assertEqual((103.05579, 104.97586), subject_object.knee_flexion)
+        self.assertEqual((0.04431, 0.04441), subject_object.knee_displacement)
+        self.assertEqual((82.87424, 79.07224), subject_object.hip_flexion)
+        self.assertEqual((17.69417799951346, 27.024233000782523), subject_object.ankle_power)
+        self.assertEqual((48.146637527229124, 47.745653464403375), subject_object.knee_power)
+        self.assertEqual((34.15918447325741, 25.23011353481411), subject_object.hip_power)
+        self.assertEqual((48.067803737682645, 43.43463214407068), subject_object.foot_weight)
