@@ -16,5 +16,26 @@ class TestInitialData(unittest.TestCase):
         self.assertEqual('74', subject1.bwsq.id)
         # Could do more tests, but it would be reiterating what's already been done
 
+    def test_percent_asymmetry(self):
+        self.assertEqual(120,percent_asymmetry(8,2))
+        self.assertEqual(-120,percent_asymmetry(2,8))
+        self.assertEqual(ValueError,percent_asymmetry(0,0))
+        self.assertEqual(0,percent_asymmetry(1,1))
 
+    def test_percent_bilat_asymmetry(self):
+        self.assertEqual(300,percent_bilat_asymmetry(8,2))
+        self.assertEqual(300,percent_bilat_asymmetry(2,8))
+        self.assertEqual(ValueError,percent_bilat_asymmetry(0,0))
+        self.assertEqual(0,percent_bilat_asymmetry(1,1))
 
+    def test_percent_gait_asymmetry1(self):
+        self.assertEqual(75,percent_gait_asymmetry1(8,2))
+        self.assertEqual(75,percent_gait_asymmetry1(2,8))
+        self.assertEqual(ValueError,percent_gait_asymmetry1(0,0))
+        self.assertEqual(0,percent_gait_asymmetry1(1,1))
+
+    def test_percent_gait_asymmetry1(self):
+        self.assertEqual(30,percent_gait_asymmetry2(8,2))
+        self.assertEqual(30,percent_gait_asymmetry2(2,8))
+        self.assertEqual(ValueError,percent_gait_asymmetry2(0,0))
+        self.assertEqual(0,percent_gait_asymmetry2(1,1))
