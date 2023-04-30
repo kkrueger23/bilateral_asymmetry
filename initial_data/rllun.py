@@ -10,3 +10,8 @@ class Lunge:
         self.hip_power = [float(rllun_dict['perc_R_HIP_POWER']), float(rllun_dict['perc_L_HIP_POWER'])]
         self.knee_power = [float(rllun_dict['perc_R_KNEE_POWER']), float(rllun_dict['perc_L_KNEE_POWER'])]
         self.ankle_power = [float(rllun_dict['perc_R_ANKLE_POWER']), float(rllun_dict['perc_L_ANKLE_POWER'])]
+
+    def get_rllun_pairs(self):
+        """
+        :return: a dictionary with all data pairs
+        """

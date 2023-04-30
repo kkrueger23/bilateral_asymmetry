@@ -12,3 +12,8 @@ class Squat:
         self.hip_power = [float(squat_dict['perc_R_HIP_POWER']), float(squat_dict['perc_L_HIP_POWER'])]
         self.knee_power = [float(squat_dict['perc_R_KNEE_POWER']), float(squat_dict['perc_L_KNEE_POWER'])]
         self.ankle_power = [float(squat_dict['perc_R_ANKLE_POWER']), float(squat_dict['perc_L_ANKLE_POWER'])]
+
+    def get_bwsq_pairs(self):
+        """
+        :return: a dictionary with all data pairs
+        """
