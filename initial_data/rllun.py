@@ -15,3 +15,7 @@ class Lunge:
         """
         :return: a dictionary with all data pairs
         """
+        return {"ankle_flexion": self.ankle_flexion,"knee_flexion":self.knee_flexion, "knee_displacement":self.knee_displacement,
+                          "hip_flexion":self.hip_flexion, "ankle_power":self.ankle_power,
+                          "knee_power":self.knee_power, "hip_power":self.hip_power,
+                          "foot_weight":self.foot_weight}

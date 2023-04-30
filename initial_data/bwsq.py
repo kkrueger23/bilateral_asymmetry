@@ -17,3 +17,7 @@ class Squat:
         """
         :return: a dictionary with all data pairs
         """
+        return {"ankle_flexion": self.ankle_flexion, "knee_flexion": self.knee_flexion, "knee_adduction": self.knee_adduction,
+                          "knee_displacement":self.knee_displacement, "hip_flexion":self.hip_flexion, "hip_adduction": self.hip_adduction,
+                          "foot_weight": self.foot_weight, "ankle_power": self.ankle_power,
+                          "knee_power": self.knee_power, "hip_power": self.hip_power}
