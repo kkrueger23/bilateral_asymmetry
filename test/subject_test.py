@@ -54,7 +54,7 @@ class TestInitialData(unittest.TestCase):
 
     def test_percent_bilat_asymmetry(self):
         self.assertEqual(300,percent_bilat_asymmetry([8,2]))
-        self.assertEqual(300,percent_bilat_asymmetry([2,8)])
+        self.assertEqual(300,percent_bilat_asymmetry([2,8]))
         self.assertEqual(ValueError,percent_bilat_asymmetry([0,0]))
         self.assertEqual(0,percent_bilat_asymmetry([1,1]))
 
