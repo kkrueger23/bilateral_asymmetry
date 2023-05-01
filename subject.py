@@ -11,45 +11,63 @@ class Subject:
         self.rllun = Lunge(rllun_dict)
         self.bwsq = Squat(bwsq_dict)
 
-def percent_asymmetry(r_leg, l_leg):
+    def get_asymmetry_pairs(self):
+        """
+        :return: a dictionary containing each motion and all associated measurements
+        """
+        raise RuntimeError
+
+    def calculate_asymmetry(self, asymmetry_fx):
+        """
+        :param asymmetry_fx: takes one of the asymmetry functions below
+        :return: returns a dictionary(?) that groups by motion and then by each measurement, and calculates the asymmetry for each joint
+        """
+        raise RuntimeError
+
+
+def percent_asymmetry(motion_pair):
     """
-    :param r_leg: measure of right leg in specific motion(angle, power, moment)
-    :param l_leg: measure of left leg in specific motion (angle, power, moment)
+    :param motion_pair: right and left leg measurements for a given motion
     :return: standard percent asymmetry value between the two legs (doesn't account for direction)
     """
+    r_leg = motion_pair[0]
+    l_leg = motion_pair[1]
     try:
         return 100 * (r_leg - l_leg) / ((r_leg + l_leg) / 2)
     except ZeroDivisionError:
         return ValueError
 
-def percent_bilat_asymmetry(r_leg, l_leg):
+def percent_bilat_asymmetry(motion_pair):
     """
-    :param r_leg: measure of right leg in specific motion(angle, power, moment)
-    :param l_leg: measure of left leg in specific motion (angle, power, moment)
+    :param motion_pair: right and left leg measurements for a given motion
     :return: standard percent bilateral asymmetry value between the two legs (accounts for direction)
     """
+    r_leg = motion_pair[0]
+    l_leg = motion_pair[1]
     try:
         return 100*((max(r_leg,l_leg)-min(r_leg,l_leg))/min(r_leg,l_leg))
     except ZeroDivisionError:
         return ValueError
 
-def percent_gait_asymmetry1(r_leg, l_leg):
+def percent_gait_asymmetry1(motion_pair):
     """
-    :param r_leg:r_leg: measure of right leg in specific motion(angle, power, moment)
-    :param l_leg: measure of left leg in specific motion (angle, power, moment)
+    :param motion_pair: right and left leg measurements for a given motion
     :return: standard percent asymmetry value between the two legs (tends to be used during gait analysis)
     """
+    r_leg = motion_pair[0]
+    l_leg = motion_pair[1]
     try:
         return 100 * (1 - ((min(r_leg, l_leg) / (max(r_leg, l_leg)))))
     except ZeroDivisionError:
         return ValueError
 
-def percent_gait_asymmetry2(r_leg, l_leg):
+def percent_gait_asymmetry2(motion_pair):
     """
-    :param r_leg:r_leg: measure of right leg in specific motion(angle, power, moment)
-    :param l_leg: measure of left leg in specific motion (angle, power, moment)
+    :param motion_pair: right and left leg measurements for a given motion
     :return: standard percent asymmetry value between the two legs (most conservative used during gait analysis)
     """
+    r_leg = motion_pair[0]
+    l_leg = motion_pair[1]
     try:
         return 100*(abs(r_leg-l_leg))/(2*(abs(r_leg+l_leg)))
     except ZeroDivisionError:
