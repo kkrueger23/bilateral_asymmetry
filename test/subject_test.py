@@ -32,43 +32,41 @@ class TestInitialData(unittest.TestCase):
                                    "hip_power":[34.15918447325741, 25.23011353481411],
                                    "foot_weight":[48.067803737682645, 43.43463214407068]}}, subject1.get_asymmetry_pairs())
 
-        self.assertEqual({"rlsd":{"ankle_flexion": 0,"knee_flexion" : 0,
-                                  "knee_displacement": 0,"hip_flexion": 0,
-                                  "ankle_power":0,"knee_power": 0,
-                                  "hip_power": 0},
-                          "bwsq": {"ankle_flexion": 0, "knee_flexion": 0,
-                                   "knee_adduction": 0, "knee_displacement": 0,
-                                   "hip_flexion": 0, "hip_adduction": 0,
-                                   "foot_weight": 0, "ankle_power": 0,
-                                   "knee_power": 0,
-                                   "hip_power": 0},
-                          "rllun": {"ankle_flexion": 0,"knee_flexion":0,
-                                   "knee_displacement": 0,"hip_flexion":0,
-                                   "ankle_power":0,"knee_power":0,
-                                   "hip_power":0,
-                                   "foot_weight":0}},subject1.calculate_asymmetry(percent_bilat_asymmetry))
+        self.assertEqual({'bwsq': {'ankle_flexion': 10.749827730572765, 'ankle_power': 154.00754117563628,
+                                   'foot_weight': 27.471559505601135,'hip_adduction': -121.9725441736265, 'hip_flexion': 9.382461576229822,
+                                   'hip_power': 27.103092865105303,'knee_adduction': 140.39015133513024,
+                                   'knee_displacement': -5.378627034677992,'knee_flexion': 3.6319477971893397,
+                                   'knee_power': 14.2540436539805},
+                          'rllun': {'ankle_flexion': 3.2208816992806035,'ankle_power': 52.72951928891872,
+                                    'foot_weight': 10.666998579023174,'hip_flexion': 4.808261407543289,
+                                    'hip_power': 35.39053015406532,'knee_displacement': 0.22568269013765724,
+                                    'knee_flexion': 1.8631364622987174,'knee_power': 0.8398336471082162},
+                          'rlsd': {'ankle_flexion': 6.325625679573825,'ankle_power': 75.02214257629508,
+                                   'hip_flexion': 14.866098898560013, 'hip_power': 39.29705947291561,
+                                   'knee_displacement': 5.303742712055663,'knee_flexion': 5.493727199211083,
+                                   'knee_power': 10.797213374764175}},subject1.calculate_asymmetry(percent_bilat_asymmetry))
 
     def test_percent_asymmetry(self):
-        self.assertEqual(120,percent_asymmetry(8,2))
-        self.assertEqual(-120,percent_asymmetry(2,8))
-        self.assertEqual(ValueError,percent_asymmetry(0,0))
-        self.assertEqual(0,percent_asymmetry(1,1))
+        self.assertEqual(120,percent_asymmetry([8,2]))
+        self.assertEqual(-120,percent_asymmetry([2,8]))
+        self.assertEqual(ValueError,percent_asymmetry([0,0]))
+        self.assertEqual(0,percent_asymmetry([1,1]))
 
     def test_percent_bilat_asymmetry(self):
-        self.assertEqual(300,percent_bilat_asymmetry(8,2))
-        self.assertEqual(300,percent_bilat_asymmetry(2,8))
-        self.assertEqual(ValueError,percent_bilat_asymmetry(0,0))
-        self.assertEqual(0,percent_bilat_asymmetry(1,1))
+        self.assertEqual(300,percent_bilat_asymmetry([8,2]))
+        self.assertEqual(300,percent_bilat_asymmetry([2,8)])
+        self.assertEqual(ValueError,percent_bilat_asymmetry([0,0]))
+        self.assertEqual(0,percent_bilat_asymmetry([1,1]))
 
     def test_percent_gait_asymmetry1(self):
-        self.assertEqual(75,percent_gait_asymmetry1(8,2))
-        self.assertEqual(75,percent_gait_asymmetry1(2,8))
-        self.assertEqual(ValueError,percent_gait_asymmetry1(0,0))
-        self.assertEqual(0,percent_gait_asymmetry1(1,1))
+        self.assertEqual(75,percent_gait_asymmetry1([8,2]))
+        self.assertEqual(75,percent_gait_asymmetry1([2,8]))
+        self.assertEqual(ValueError,percent_gait_asymmetry1([0,0]))
+        self.assertEqual(0,percent_gait_asymmetry1([1,1]))
 
-    def test_percent_gait_asymmetry1(self):
-        self.assertEqual(30,percent_gait_asymmetry2(8,2))
-        self.assertEqual(30,percent_gait_asymmetry2(2,8))
-        self.assertEqual(ValueError,percent_gait_asymmetry2(0,0))
-        self.assertEqual(0,percent_gait_asymmetry2(1,1))
+    def test_percent_gait_asymmetry2(self):
+        self.assertEqual(30,percent_gait_asymmetry2([8,2]))
+        self.assertEqual(30,percent_gait_asymmetry2([2,8]))
+        self.assertEqual(ValueError,percent_gait_asymmetry2([0,0]))
+        self.assertEqual(0,percent_gait_asymmetry2([1,1]))
 

@@ -15,14 +15,26 @@ class Subject:
         """
         :return: a dictionary containing each motion and all associated measurements
         """
-        raise RuntimeError
+        all_motion_pairs = {}
+        all_motion_pairs['rlsd'] = self.rlsd.get_rlsd_pairs()
+        all_motion_pairs['bwsq'] = self.bwsq.get_bwsq_pairs()
+        all_motion_pairs['rllun'] = self.rllun.get_rllun_pairs()
+
+        return all_motion_pairs
 
     def calculate_asymmetry(self, asymmetry_fx):
         """
         :param asymmetry_fx: takes one of the asymmetry functions below
         :return: returns a dictionary(?) that groups by motion and then by each measurement, and calculates the asymmetry for each joint
         """
-        raise RuntimeError
+        motion_pairs = self.get_asymmetry_pairs()
+        motion_asymmetry = motion_pairs.copy()
+        for movement in motion_asymmetry:
+            movement_dict = motion_asymmetry[movement]
+            for measurement in movement_dict:
+                pair = movement_dict[measurement]
+                motion_asymmetry[movement][measurement] = asymmetry_fx(pair)
+        return motion_asymmetry
 
 
 def percent_asymmetry(motion_pair):
