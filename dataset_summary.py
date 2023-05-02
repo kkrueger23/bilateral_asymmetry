@@ -6,6 +6,9 @@ class DatasetSummary:
         for i in range(len(demographics_dict)):
             self.all_subjects.append(Subject(demographics_dict[i],rlsd_dict[i+1],rllun_dict[i+1],bwsq_dict[i+1]))
         self.subject_count = len(demographics_dict)
+        self.all_asymmetries = []
+        for subject in self.all_subjects:
+            self.all_asymmetries.append(subject.calculate_asymmetry(percent_bilat_asymmetry))
 
     def find_subject(self,id):
         """
@@ -16,6 +19,11 @@ class DatasetSummary:
     def sort_by_sex(self):
         """
         :return: 2 lists of subjects sorted by their sex (are women more asymmetrical than men)
+        """
+
+    def count_by_sex(self):
+        """
+        :return: uses sort_by_sex and counts the given list (important for summarizing data)
         """
 
     def get_min(self):
@@ -31,7 +39,7 @@ class DatasetSummary:
 
     def avg_demographics(self):
         """
-        :return: list of average height, weight, and age values (data summary)
+        :return: dictionary of average height, weight, and age values (data summary)
         """
 
     def avg_asymmetry(self):
