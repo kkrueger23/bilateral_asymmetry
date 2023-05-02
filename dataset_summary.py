@@ -15,16 +15,33 @@ class DatasetSummary:
         :param id: id (str) of subject that is being looked for
         :return: subject object
         """
+        if isinstance(id,str) is not True:
+            return ValueError
+        for subject in self.all_subjects:
+            if subject.id == id:
+                return subject
+            else:
+                return None
 
     def sort_by_sex(self):
         """
         :return: 2 lists of subjects sorted by their sex (are women more asymmetrical than men)
         """
+        male_list = []
+        female_list = []
+        for subject in self.all_subjects:
+            if subject.demographics.sex == 'M':
+                male_list.append(subject)
+            else:
+                female_list.append(subject)
+        return male_list, female_list
 
     def count_by_sex(self):
         """
         :return: uses sort_by_sex and counts the given list (important for summarizing data)
         """
+        males, females = self.sort_by_sex()
+        return [len(males), len(females)]
 
     def get_min(self):
         """

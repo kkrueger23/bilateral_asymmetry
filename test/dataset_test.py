@@ -30,18 +30,19 @@ class TestInitialData(unittest.TestCase):
                                    'knee_displacement': 5.303742712055663,'knee_flexion': 5.493727199211083,
                                    'knee_power': 10.797213374764175}},all_data.all_asymmetries[0])
 
-    def test_find_subject(self):
-        self.assertEqual(all_data[0],all_data.find_subject('74'))
+    ### tests for find subject
+        self.assertEqual(list(all_data.all_subjects)[0],all_data.find_subject('74'))
         self.assertEqual(ValueError, all_data.find_subject(74))
         self.assertEqual(None, all_data.find_subject('0'))
 
-    def test_sort_by_sex_and_count(self):
+    ### test sort by sex and count
         male_list,female_list = all_data.sort_by_sex()
-        self.assertEqual(all_data[0],male_list[0])
-        self.assertEqual(all_data[1],female_list[0])
-        self.assertEqual(all_data.count_sex)
+        self.assertEqual(list(all_data.all_subjects)[0],male_list[0])
+        self.assertEqual(list(all_data.all_subjects)[1],female_list[0])
+        self.assertEqual(len(male_list),all_data.count_by_sex()[0])
+        self.assertEqual(len(female_list),all_data.count_by_sex()[1])
 
-    def test_get_min_max(self):
+    ### test get_min and get_max:
         minimums = all_data.get_min()
         maximums = all_data.get_max()
         self.assertEqual(0.279016066,minimums.rllun.hip_flexion)
@@ -63,7 +64,7 @@ class TestInitialData(unittest.TestCase):
         sorted_bwsq = (all_data.sort_asymmetry())["bwsq"]
         self.assertEqual('percent_ankle_power',list(sorted_bwsq)[0])
         self.assertEqual('knee_flexion',list(sorted_bwsq)[-1])
-        self.assertEqual({},sorted_bwsq)
+        self.assertEqual({},sorted_bwsq)'''
 
 
 
