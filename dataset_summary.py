@@ -1,4 +1,6 @@
+# install statistics
 from subject import *
+import statistics
 
 class DatasetSummary:
     def __init__(self,demographics_dict,rlsd_dict,rllun_dict,bwsq_dict):
@@ -131,3 +133,16 @@ class DatasetSummary:
             sorted_dict[exercise] = sorted(ex_dict.items(), key = lambda x:x[1], reverse = True)
         return sorted_dict
 
+    def st_dev_asymmeetry(self):
+        """
+        :return: dictionary with the standard deviation of asymmetry for each exercise and its motions (data summary)
+        """
+        all_data = self.all_asymmetry_dict()
+        st_dev_dict = {}
+        for exercise in all_data:
+            exercise_list = {}
+            for motion in all_data[exercise]:
+                motion_list = all_data[exercise][motion]
+                exercise_list[motion] = statistics.stdev(motion_list)
+            st_dev_dict[exercise] = exercise_list
+        return st_dev_dict
