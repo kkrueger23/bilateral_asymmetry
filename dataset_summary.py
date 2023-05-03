@@ -6,9 +6,9 @@ class DatasetSummary:
         for i in range(len(demographics_dict)):
             self.all_subjects.append(Subject(demographics_dict[i],rlsd_dict[i+1],rllun_dict[i+1],bwsq_dict[i+1]))
         self.subject_count = len(demographics_dict)
-        self.all_asymmetries = []
+        self.subject_asymmetries = []
         for subject in self.all_subjects:
-            self.all_asymmetries.append(subject.calculate_asymmetry(percent_bilat_asymmetry))
+            self.subject_asymmetries.append(subject.calculate_asymmetry(percent_bilat_asymmetry))
 
     def find_subject(self,id):
         """
@@ -43,16 +43,52 @@ class DatasetSummary:
         males, females = self.sort_by_sex()
         return [len(males), len(females)]
 
+    def all_asymmetry_dict(self):
+        """
+        :return: dictionary with all participant data on an exercise-by-exercise, measure-by-measure basis (better
+        format for finding average, stdev, minimum and maximum)
+        """
+        subjects = self.subject_asymmetries
+        data_format = {"rlsd":{"ankle_flexion": [],"knee_flexion" : [],"knee_displacement": [],"hip_flexion": [],
+                                  "ankle_power":[],"knee_power": [],"hip_power": []},"bwsq": {"ankle_flexion": [],"knee_flexion": [], "knee_adduction": [], "knee_displacement":[],
+                                   "hip_flexion": [], "hip_adduction": [],"foot_weight": [], "ankle_power": [],
+                                   "knee_power": [],"hip_power": []},"rllun": {"ankle_flexion": [],"knee_flexion":[],"knee_displacement": [],"hip_flexion":[],
+                                   "ankle_power":[],"knee_power":[],"hip_power":[],"foot_weight":[]}}
+        for subject in subjects:
+            for exercise in subject:
+                for measure in subject[exercise]:
+                    if isinstance(subject[exercise][measure],float) is True:
+                        data_format[exercise][measure].append(subject[exercise][measure])
+        return data_format
+
     def get_min(self):
         """
         :return: dictionary with the minimum asymmetry for each exercise and its motions
         """
+        all_data = self.all_asymmetry_dict()
+        min_dict = {}
+        for exercise in all_data:
+            exercise_list = {}
+            for motion in all_data[exercise]:
+                motion_list = all_data[exercise][motion]
+                exercise_list[motion] = min(motion_list)
+            min_dict[exercise] = exercise_list
+        return min_dict
 
     def get_max(self):
         """
         :return: dictionary with the maximum asymmetry for each exercise and its motions (can tell us where there may
         have been some issues with data capture)
         """
+        all_data = self.all_asymmetry_dict()
+        min_dict = {}
+        for exercise in all_data:
+            exercise_list = {}
+            for motion in all_data[exercise]:
+                motion_list = all_data[exercise][motion]
+                exercise_list[motion] = max(motion_list)
+            min_dict[exercise] = exercise_list
+        return min_dict
 
     def avg_demographics(self):
         """
