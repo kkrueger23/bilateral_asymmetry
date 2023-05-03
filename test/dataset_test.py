@@ -88,5 +88,8 @@ class TestInitialData(unittest.TestCase):
  ('hip_flexion', 3.95818318254965),
  ('knee_flexion', 2.7762848704084586)],sorted_bwsq)
 
+    ### test final format for exporting data
+        self.assertEqual([6.851139147038701, 5.200087445744556, 0.11950387024814785, 18.807175937684278],all_data.final_dict_format()["bwsq"]['ankle_flexion'])
+
 
 

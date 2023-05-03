@@ -146,3 +146,24 @@ class DatasetSummary:
                 exercise_list[motion] = statistics.stdev(motion_list)
             st_dev_dict[exercise] = exercise_list
         return st_dev_dict
+
+    def final_dict_format(self):
+        """
+        :return: collects avg, min, max, and standard deviation in a list using the same dictionary format (this can be
+        used by researchers for final analysis)
+        """
+        all_data = self.all_asymmetry_dict()
+        minimums = self.get_min()
+        maximums = self.get_max()
+        averages = self.avg_asymmetry()
+        st_dev = self.st_dev_asymmeetry()
+        final_dict = {}
+        for exercise in all_data:
+            exercise_list = {}
+            for motion in all_data[exercise]:
+                motion_list = [averages[exercise][motion],st_dev[exercise][motion],minimums[exercise][motion],
+                               maximums[exercise][motion]]
+                exercise_list[motion] = motion_list
+            final_dict[exercise] = exercise_list
+
+        return final_dict
