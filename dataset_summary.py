@@ -161,9 +161,9 @@ class DatasetSummary:
         for exercise in all_data:
             exercise_list = {}
             for motion in all_data[exercise]:
-                motion_list = [averages[exercise][motion],st_dev[exercise][motion],minimums[exercise][motion],
-                               maximums[exercise][motion]]
-                exercise_list[motion] = motion_list
+                motion_dict = {'average':averages[exercise][motion],'standard deviation':st_dev[exercise][motion],
+                               'minimum':minimums[exercise][motion],'maximum':maximums[exercise][motion]}
+                exercise_list[motion] = motion_dict
             final_dict[exercise] = exercise_list
 
         return final_dict

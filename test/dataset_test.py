@@ -1,6 +1,8 @@
 import unittest
 from initial_data.get_data import *
 from dataset_summary import *
+from export_data import *
+import pandas as pd
 
 class TestInitialData(unittest.TestCase):
     def test_subject(self):
@@ -89,7 +91,16 @@ class TestInitialData(unittest.TestCase):
  ('knee_flexion', 2.7762848704084586)],sorted_bwsq)
 
     ### test final format for exporting data
-        self.assertEqual([6.851139147038701, 5.200087445744556, 0.11950387024814785, 18.807175937684278],all_data.final_dict_format()["bwsq"]['ankle_flexion'])
+        self.assertEqual({'average': 6.851139147038701,'maximum': 18.807175937684278,'minimum': 0.11950387024814785,
+                          'standard deviation': 5.200087445744556},all_data.final_dict_format()["bwsq"]['ankle_flexion'])
 
-
-
+    ### test export_data (couldn't compare dictionaries exactly because the csv has extra significant figures)
+        export_data(all_data)
+        df = pd.read_csv('bwsq_data.csv', header = 0)
+        bwsq_dict = df.to_dict(orient='records')
+        new_dict = {}
+        for item in bwsq_dict:
+            name = (next(iter(item.values())))
+            (k := next(iter(item)), item.pop(k))
+            new_dict[name] = item
+        self.assertAlmostEqual(new_dict['ankle_flexion']['average'], all_data.final_dict_format()['bwsq']['ankle_flexion']['average'])
