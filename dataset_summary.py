@@ -58,7 +58,7 @@ class DatasetSummary:
             for exercise in subject:
                 for measure in subject[exercise]:
                     if isinstance(subject[exercise][measure],float) is True:
-                        data_format[exercise][measure].append(subject[exercise][measure])
+                        data_format[exercise][measure].append(abs(subject[exercise][measure]))
         return data_format
 
     def get_min(self):
@@ -81,27 +81,53 @@ class DatasetSummary:
         have been some issues with data capture)
         """
         all_data = self.all_asymmetry_dict()
-        min_dict = {}
+        max_dict = {}
         for exercise in all_data:
             exercise_list = {}
             for motion in all_data[exercise]:
                 motion_list = all_data[exercise][motion]
                 exercise_list[motion] = max(motion_list)
-            min_dict[exercise] = exercise_list
-        return min_dict
+            max_dict[exercise] = exercise_list
+        return max_dict
 
     def avg_demographics(self):
         """
         :return: dictionary of average height, weight, and age values (data summary)
         """
+        ages = []
+        heights = []
+        weights = []
+        for subject in self.all_subjects:
+            ages.append(subject.demographics.age)
+            heights.append(subject.demographics.height)
+            weights.append(subject.demographics.weight)
+        avg_demographics = {'age':(sum(ages)/len(ages)),'height':(sum(heights)/len(heights)),
+                            'weight':(sum(weights)/len(weights))}
+        return avg_demographics
 
     def avg_asymmetry(self):
         """
         :return: dictionary with the avg asymmetry for each exercise and its motions (data summary)
         """
+        all_data = self.all_asymmetry_dict()
+        avg_dict = {}
+        for exercise in all_data:
+            exercise_list = {}
+            for motion in all_data[exercise]:
+                motion_list = all_data[exercise][motion]
+                exercise_list[motion] = (sum(motion_list)/len(motion_list))
+            avg_dict[exercise] = exercise_list
+        return avg_dict
 
     def sort_asymmetry(self):
         """
         :return: uses avg_asymmetry function to get dict and sorts the motion greatest to least % asymmetry (this can
-        inform us about which motions are the mos problematic)
+        inform us about which motions are the most problematic)
         """
+        avg_dict= self.avg_asymmetry().copy()
+        sorted_dict = {}
+        for exercise in avg_dict:
+            ex_dict = avg_dict[exercise]
+            sorted_dict[exercise] = sorted(ex_dict.items(), key = lambda x:x[1], reverse = True)
+        return sorted_dict
+

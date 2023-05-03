@@ -60,21 +60,30 @@ class TestInitialData(unittest.TestCase):
         self.assertAlmostEqual(12.86486572, maximums['rllun']['hip_flexion'])
         self.assertAlmostEqual(18.80717594, maximums['bwsq']['ankle_flexion'])
 
-    '''def test_avg_demographics(self):
-        self.assertEqual(19.69,all_data.avg_demographics["age"])
-        self.assertEqual(67.48275862, all_data.avg_demographics["height"])
-        self.assertEqual(154.8275862, all_data.avg_demographics["weight"])
+    ### test_avg_demographics:
+        self.assertAlmostEqual(19.68965517,all_data.avg_demographics()["age"])
+        self.assertAlmostEqual(67.48275862, all_data.avg_demographics()["height"])
+        self.assertAlmostEqual(154.8275862, all_data.avg_demographics()["weight"])
 
-    def test_avg_asymmetry(self):
-        self.assertEqual(6.851139147,all_data.avg_asymmetry["bwsq"]['ankle_flexion'])
-        self.assertEqual(8.43167543, all_data.avg_asymmetry["rlsd"]['ankle_flexion'])
-        self.assertEqual(10.46344258, all_data.avg_asymmetry["rllun"]['ankle_flexion'])
+    ### test_avg_asymmetry:
+        self.assertAlmostEqual(6.851139147,all_data.avg_asymmetry()["bwsq"]['ankle_flexion'])
+        self.assertAlmostEqual(8.65924190, all_data.avg_asymmetry()["rlsd"]['ankle_flexion'])
+        self.assertAlmostEqual(10.46344258, all_data.avg_asymmetry()["rllun"]['ankle_flexion'])
 
-    def test_sort_asymmetry(self):
+    ### test_sort_asymmetry:
         sorted_bwsq = (all_data.sort_asymmetry())["bwsq"]
-        self.assertEqual('percent_ankle_power',list(sorted_bwsq)[0])
-        self.assertEqual('knee_flexion',list(sorted_bwsq)[-1])
-        self.assertEqual({},sorted_bwsq)'''
+        self.assertEqual(('knee_adduction', 188.32422155632767),list(sorted_bwsq)[0])
+        self.assertEqual(('knee_flexion', 2.7762848704084586),list(sorted_bwsq)[-1])
+        self.assertEqual([('knee_adduction', 188.32422155632767),
+ ('hip_adduction', 61.904685148319835),
+ ('ankle_power', 41.26268186435315),
+ ('knee_displacement', 31.988213045601796),
+ ('hip_power', 12.347952167667426),
+ ('knee_power', 10.633869175732249),
+ ('foot_weight', 8.55153998791356),
+ ('ankle_flexion', 6.851139147038701),
+ ('hip_flexion', 3.95818318254965),
+ ('knee_flexion', 2.7762848704084586)],sorted_bwsq)
 
 
 
