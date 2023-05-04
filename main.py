@@ -1,9 +1,10 @@
 from dataset_summary import *
 from individual_report import *
 from export_data import *
+from initial_data.get_data import *
 
 
-def create_report(subject,concerns_txt):
+def create_individual_report(subject,concerns_txt):
     pdf = Report()
     pdf.alias_nb_pages()
     pdf.add_page()
@@ -36,9 +37,9 @@ def main():
 
 
     # generates pdf document about subject indicating
-    create_report(subject1,"concerns_74.txt")
-    create_report(subject2,"concerns_75.txt")
-    create_report(subject3, "concerns_75.txt")
+    create_individual_report(subject1,"concerns_74.txt")
+    create_individual_report(subject2,"concerns_75.txt")
+    create_individual_report(subject3, "concerns_75.txt")
 
 
 if __name__ == "__main__":

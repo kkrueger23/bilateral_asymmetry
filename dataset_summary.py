@@ -103,8 +103,9 @@ class DatasetSummary:
             ages.append(subject.demographics.age)
             heights.append(subject.demographics.height)
             weights.append(subject.demographics.weight)
-        avg_demographics = {'age':(sum(ages)/len(ages)),'height':(sum(heights)/len(heights)),
-                            'weight':(sum(weights)/len(weights))}
+        avg_demographics = {'age':[(sum(ages)/len(ages)),statistics.stdev(ages)],
+                            'height':[(sum(heights)/len(heights)),statistics.stdev(heights)],
+                            'weight':[(sum(weights)/len(weights)),statistics.stdev(weights)]}
         return avg_demographics
 
     def avg_asymmetry(self):

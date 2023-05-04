@@ -63,9 +63,12 @@ class TestInitialData(unittest.TestCase):
         self.assertAlmostEqual(18.80717594, maximums['bwsq']['ankle_flexion'])
 
     ### test_avg_demographics:
-        self.assertAlmostEqual(19.68965517,all_data.avg_demographics()["age"])
-        self.assertAlmostEqual(67.48275862, all_data.avg_demographics()["height"])
-        self.assertAlmostEqual(154.8275862, all_data.avg_demographics()["weight"])
+        self.assertAlmostEqual(19.68965517,all_data.avg_demographics()["age"][0])
+        self.assertAlmostEqual(67.48275862, all_data.avg_demographics()["height"][0])
+        self.assertAlmostEqual(154.8275862, all_data.avg_demographics()["weight"][0])
+        self.assertAlmostEqual(1.49052838, all_data.avg_demographics()["age"][1])
+        self.assertAlmostEqual(3.48077053, all_data.avg_demographics()["height"][1])
+        self.assertAlmostEqual(28.70175326, all_data.avg_demographics()["weight"][1])
 
     ### test avg_asymmetry and st_dev_asymmetry:
         self.assertAlmostEqual(6.851139147,all_data.avg_asymmetry()["bwsq"]['ankle_flexion'])
