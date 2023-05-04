@@ -12,7 +12,7 @@ class TestInitialData(unittest.TestCase):
         rllun_dict = get_dict_data('rllun.xlsx', 'rllun_data')
 
         all_data = DatasetSummary(dem_dict,rlsd_dict,rllun_dict,bwsq_dict)
-        self.assertEqual(29,all_data.subject_count)
+        self.assertEqual(29,all_data.subject_count())
         id_list = []
         for subject in all_data.all_subjects:
             id_list.append(subject.id)
@@ -30,7 +30,7 @@ class TestInitialData(unittest.TestCase):
                           'rlsd': {'ankle_flexion': 6.325625679573825,'ankle_power': 75.02214257629508,
                                    'hip_flexion': 14.866098898560013, 'hip_power': 39.29705947291561,
                                    'knee_displacement': 5.303742712055663,'knee_flexion': 5.493727199211083,
-                                   'knee_power': 10.797213374764175}},all_data.subject_asymmetries[0])
+                                   'knee_power': 10.797213374764175}},all_data.subject_asymmetries()[0])
 
     ### tests for find subject
         self.assertEqual(list(all_data.all_subjects)[0],all_data.find_subject('74'))

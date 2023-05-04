@@ -7,10 +7,17 @@ class DatasetSummary:
         self.all_subjects = []
         for i in range(len(demographics_dict)):
             self.all_subjects.append(Subject(demographics_dict[i],rlsd_dict[i+1],rllun_dict[i+1],bwsq_dict[i+1]))
-        self.subject_count = len(demographics_dict)
-        self.subject_asymmetries = []
+
+    def subject_count(self):
+        return len(self.all_subjects)
+    def subject_asymmetries(self):
+        """
+        :return: asymmetry pairs for all subjects using percent_bilat_asymmetry() function
+        """
+        subject_asymmetries = []
         for subject in self.all_subjects:
-            self.subject_asymmetries.append(subject.calculate_asymmetry(percent_bilat_asymmetry))
+            subject_asymmetries.append(subject.calculate_asymmetry(percent_bilat_asymmetry))
+        return subject_asymmetries
 
     def find_subject(self,id):
         """
@@ -50,7 +57,7 @@ class DatasetSummary:
         :return: dictionary with all participant data on an exercise-by-exercise, measure-by-measure basis (better
         format for finding average, stdev, minimum and maximum)
         """
-        subjects = self.subject_asymmetries
+        subjects = self.subject_asymmetries()
         data_format = {"rlsd":{"ankle_flexion": [],"knee_flexion" : [],"knee_displacement": [],"hip_flexion": [],
                                   "ankle_power":[],"knee_power": [],"hip_power": []},"bwsq": {"ankle_flexion": [],"knee_flexion": [], "knee_adduction": [], "knee_displacement":[],
                                    "hip_flexion": [], "hip_adduction": [],"foot_weight": [], "ankle_power": [],
@@ -94,7 +101,8 @@ class DatasetSummary:
 
     def avg_demographics(self):
         """
-        :return: dictionary of average height, weight, and age values (data summary)
+        :return: dictionary of with lists for average and standard deviation of height, weight, and age values in a
+        given dataset (data summary)
         """
         ages = []
         heights = []
