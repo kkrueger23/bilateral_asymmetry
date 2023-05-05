@@ -34,6 +34,7 @@ class TestInitialData(unittest.TestCase):
 
     ### tests for find subject
         self.assertEqual(list(all_data.all_subjects)[0],all_data.find_subject('74'))
+        self.assertEqual(list(all_data.all_subjects)[1],all_data.find_subject('75'))
         self.assertEqual(ValueError, all_data.find_subject(74))
         self.assertEqual(None, all_data.find_subject('0'))
 

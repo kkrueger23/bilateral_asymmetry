@@ -42,15 +42,12 @@ def main():
     export_data(all_data)
 
     #creates a subject object
-    subject1 = Subject(dem_dict[0], rlsd_dict[1], rllun_dict[1], bwsq_dict[1])
-    subject2 = Subject(dem_dict[1], rlsd_dict[2], rllun_dict[2], bwsq_dict[2])
-    subject3 = Subject(dem_dict[2], rlsd_dict[3], rllun_dict[3], bwsq_dict[3])
-
+    subject1 = all_data.find_subject("74")
+    subject2 = all_data.find_subject("75")
 
     # generates pdf document about subject indicating
     create_individual_report(subject1,"concerns_74.txt")
-    create_individual_report(subject2,"concerns_75.txt")
-    create_individual_report(subject3, "concerns_75.txt")
+    create_individual_report(subject2, "concerns_75.txt")
 
     # creates additional data objects (male and female)
     male_participants,female_participants = all_data.sort_by_sex()

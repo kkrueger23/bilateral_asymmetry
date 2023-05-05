@@ -32,8 +32,8 @@ class DatasetSummary:
         for subject in self.all_subjects:
             if subject.id == id:
                 return subject
-            else:
-                return None
+        else:
+            return None
 
     def sort_by_sex(self):
         """

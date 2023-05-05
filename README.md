@@ -5,7 +5,7 @@ The purpose of this project is to create an alternative way to analyze data that
 ## Approach: 
 All data for this project has been collected in the biomechanics labs on campus and is stored in personal Excel files. It has also used the packages Pandas + openpyxl, unittest, FPDF, and datetime.
 
-## Initial Project Plan:
+## Project Plan and Design:
 https://docs.google.com/document/d/1sfAM4L-IkmXWnsPRfF4YaYlhIZt6E6EHea03y_aiZHE/edit?usp=sharing
 
 ## UML diagram:
