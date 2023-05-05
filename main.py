@@ -28,6 +28,7 @@ def create_all_data_report(all_data,name):
     pdf.rllun_data(all_data)
     pdf.output(name + '.pdf')
 
+
 def main():
     # gets xlsx data
     dem_dict = get_dict_data('Demographics.xlsx', 'Demographics')
@@ -51,16 +52,22 @@ def main():
 
     # creates additional data objects (male and female)
     male_participants,female_participants = all_data.sort_by_sex()
-
     male_data = DatasetSummary(dem_dict, rlsd_dict, rllun_dict, bwsq_dict)
-    for subject in male_data.all_subjects:
-        if subject not in male_participants:
-            male_data.all_subjects.remove(subject)
+    male_id = []
+    for subject in male_participants:
+        male_id.append(subject.id)
 
     female_data = DatasetSummary(dem_dict, rlsd_dict, rllun_dict, bwsq_dict)
-    for subject in female_data.all_subjects:
-        if subject not in female_participants:
-            female_data.all_subjects.remove(subject)
+    female_id = []
+    for subject in female_participants:
+        female_id.append(subject.id)
+
+    for id in female_id:
+        male_data.all_subjects.remove(male_data.find_subject(id))
+
+    for id in male_id:
+        female_data.all_subjects.remove(female_data.find_subject(id))
+
 
     # generates pdf document summarizing the findings of a full dataset
     create_all_data_report(all_data, 'all_subject')
