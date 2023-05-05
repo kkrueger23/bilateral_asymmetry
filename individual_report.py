@@ -178,7 +178,7 @@ class Report(FPDF):
         self.set_font('Arial', style='', size=12)
         self.multi_cell(0, 5, txt)
         self.ln()
-        with open(file="/Users/kkrueger/desktop/Asymmetry/data/"+txt_file) as concerns_txt:
+        with open(file="txt_files/"+txt_file) as concerns_txt:
             subject_concerns = concerns_txt.read()
         self.multi_cell(0,5,subject_concerns)
 
