@@ -9,6 +9,9 @@ class DatasetSummary:
             self.all_subjects.append(Subject(demographics_dict[i],rlsd_dict[i+1],rllun_dict[i+1],bwsq_dict[i+1]))
 
     def subject_count(self):
+        """
+        :return: returns count for number of subjects
+        """
         return len(self.all_subjects)
     def subject_asymmetries(self):
         """

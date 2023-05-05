@@ -10,12 +10,14 @@ class TestInitialData(unittest.TestCase):
         rllun_dict = get_dict_data('rllun.xlsx', 'rllun_data')
         subject1 = Subject(dem_dict[0],rlsd_dict[1],rllun_dict[1],bwsq_dict[1])
 
+        # Tests initializing data
         self.assertEqual('74', subject1.id)
         self.assertEqual('74',subject1.rlsd.id)
         self.assertEqual('74', subject1.rllun.id)
         self.assertEqual('74', subject1.bwsq.id)
         # Could do more tests, but it would be reiterating what's already been done
 
+    # Tests get_asymmetry_pairs
         self.assertEqual({"rlsd":{"ankle_flexion": [31.80302, 33.81476],"knee_flexion" : [74.38065, 78.46692],
                                   "knee_displacement": [0.05599, 0.05317],"hip_flexion": [69.10696, 60.16306],
                                   "ankle_power":[10.31173960310218, 18.047827590237784],"knee_power": [45.03117354457981, 49.893285437348446],
@@ -32,6 +34,7 @@ class TestInitialData(unittest.TestCase):
                                    "hip_power":[34.15918447325741, 25.23011353481411],
                                    "foot_weight":[48.067803737682645, 43.43463214407068]}}, subject1.get_asymmetry_pairs())
 
+    # Tests calculate_asymmetry using percent_bilat_asymmetry
         self.assertEqual({'bwsq': {'ankle_flexion': 10.749827730572765, 'ankle_power': 154.00754117563628,
                                    'foot_weight': 27.471559505601135,'hip_adduction': -121.9725441736265, 'hip_flexion': 9.382461576229822,
                                    'hip_power': 27.103092865105303,'knee_adduction': 140.39015133513024,

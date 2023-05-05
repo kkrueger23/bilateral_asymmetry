@@ -24,7 +24,7 @@ class DataReport(FPDF):
         """
         :return: subject specific demographics
         """
-        # add name and date
+        # potential to add info about the study
         self.set_font('Arial', size=12)
         with open('txt_files/about_study.txt', 'rb') as fh:
             txt = fh.read().decode()
@@ -68,6 +68,7 @@ class DataReport(FPDF):
         self.cell(38, 6, 'Maximum', border=1)
         self.ln()
         self.set_font('Arial', style='', size=11)
+        # adds data
         for exercise in rlsd:
             self.cell(38,6,exercise,border=1,align='C')
             self.cell(38, 6, str(round(rlsd[exercise]['average'], 3)), border=1,align='C')
@@ -81,6 +82,7 @@ class DataReport(FPDF):
         """
         :return: subject specific bwsq asymmetries
         """
+        # formats heading
         bwsq = all_data.final_dict_format()['bwsq']
         self.set_font('Arial', style='B', size=14)
         self.set_fill_color(203, 207, 212)
@@ -95,6 +97,7 @@ class DataReport(FPDF):
         self.cell(38, 6, 'Maximum', border=1)
         self.ln()
         self.set_font('Arial', style='', size=11)
+        # adds data
         for exercise in bwsq:
             self.cell(38, 6, exercise, border=1, align='C')
             self.cell(38, 6, str(round(bwsq[exercise]['average'], 3)), border=1, align='C')
@@ -108,6 +111,7 @@ class DataReport(FPDF):
         """
         :return: data specific rllun asymmetries
         """
+        # formats heading
         rllun = all_data.final_dict_format()['bwsq']
         self.set_font('Arial', style='B', size=14)
         self.set_fill_color(203, 207, 212)
@@ -122,6 +126,7 @@ class DataReport(FPDF):
         self.cell(38, 6, 'Maximum', border=1)
         self.ln()
         self.set_font('Arial', style='', size=11)
+        # adds data
         for exercise in rllun:
             self.cell(38, 6, exercise, border=1, align='C')
             self.cell(38, 6, str(round(rllun[exercise]['average'], 3)), border=1, align='C')
