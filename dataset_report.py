@@ -112,10 +112,10 @@ class DataReport(FPDF):
         :return: data specific rllun asymmetries
         """
         # formats heading
-        rllun = all_data.final_dict_format()['bwsq']
+        rllun = all_data.final_dict_format()['rllun']
         self.set_font('Arial', style='B', size=14)
         self.set_fill_color(203, 207, 212)
-        self.cell(0, 6, 'BODY-WEIGHT SQUAT ASYMMETRY', align='C', border=1, fill=True)
+        self.cell(0, 6, 'LUNGE ASYMMETRY', align='C', border=1, fill=True)
         self.ln()
         self.set_fill_color(252, 252, 252)
         self.set_font('Arial', style='B', size=11)
