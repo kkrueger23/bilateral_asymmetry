@@ -44,9 +44,9 @@ class DataReport(FPDF):
         self.cell(63,6,'Age: '+str(round(dataset.avg_demographics()['age'][0],2)) + ' ± '
                   +str(round(dataset.avg_demographics()['age'][1],2)),align='L')
         self.cell(63, 6, 'Height (in): ' + str(round(dataset.avg_demographics()['height'][0],2)) + ' ± '
-                  +str(round(dataset.avg_demographics()['age'][1],2)),align='C')
+                  +str(round(dataset.avg_demographics()['height'][1],2)),align='C')
         self.cell(63, 6, 'Weight (lbs): ' + str(round(dataset.avg_demographics()['weight'][0],2)) +' ± '
-                  + str(round(dataset.avg_demographics()['age'][1], 2)), align='R')
+                  + str(round(dataset.avg_demographics()['weight'][1], 2)), align='R')
         self.ln(10)
 
     def rlsd_data(self,all_data):
